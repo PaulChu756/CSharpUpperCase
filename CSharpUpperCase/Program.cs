@@ -11,19 +11,32 @@ namespace CSharpUpperCase
         static void Main(string[] args)
         {
             string s = "the quick brown fox";
+            string ss = "THE QUICK BROWN FOX";
+
             char[] charArray;
-            char currentLetter;
+            charArray = s.ToCharArray(); // turn string to char array
 
-            charArray = s.ToCharArray();
-
-            for (int i = 0; i < charArray.Length; ++i)
+            if (char.IsLower(charArray[0])) // check if the first element in the array is lower, if true, upper case it
             {
-                currentLetter = charArray[i];
-                if(char.IsLower(currentLetter))
+                charArray[0] = char.ToUpper(charArray[0]);
+            }
+
+            for (int i = 1; i < charArray.Length; ++i) // loop through char array
+            {
+                if (char.IsUpper(charArray[i])) // checks if element in array is uppercase, if so, lower case it
                 {
-                    charArray[i] = char.ToUpper(currentLetter);
+                    charArray[i] = char.ToLower(charArray[i]);
+                }
+
+                if (charArray[i - 1] == ' ') // check for spaces
+                {
+                    if (char.IsLower(charArray[i])) // if the char array is lower, upper case it
+                    {
+                        charArray[i] = char.ToUpper(charArray[i]);
+                    }
                 }
             }
+
             Console.Write(charArray);
             Console.Read();
         }
